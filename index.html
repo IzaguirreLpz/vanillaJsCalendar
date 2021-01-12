@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Vanilla Calendar</title>
+        <meta name="description" content="A simple Calendar in JS Vanilla">
+        <meta name="author" content="https://github.com/marssola/vanilla-calendar">
+
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="src/css/vanilla-calendar.css">
+        <script src="src/js/vanilla-calendar.js"></script>
+    </head>
+    <body>
+        <div class="content">
+            <div id="myCalendar" class="vanilla-calendar" style="margin-bottom: 20px"></div>
+        </div>
+        <script>
+            let pastDates = false, availableDates = false, availableWeekDays = false
+            
+            let calendar = new VanillaCalendar({
+                selector: "#myCalendar",
+                shortWeekday: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                onSelect: (data, elem) => {
+                    console.log(data)
+                    //convertir formato de fecha a uno distinto
+                    data = new Date()
+                    let fechaSeleccionada = data.getDate() + "-" + (data.getMonth() + 1) + "-" + data.getFullYear()
+                    console.log(fechaSeleccionada)
+                }
+            })
+            //desabilitar fechas pasadas a hoy
+            calendar.set({pastDates: pastDates})
+            //desabilitar fechas y solo dejar fechas especificas
+            calendar.set({availableDates: [
+                //{date: '2021-01-12'},
+                //{date: '2021-01-13'}
+            ], datesFilter: false})
+            //desabilitar dias distintos a los ingresados
+            calendar.set({availableWeekDays: [
+                {day: 'lunes'},
+                {day: 'miercoles'},
+                {day: 'martes'},
+            ], datesFilter: false})
+        </script>
+    </body>
+</html>
